@@ -1,0 +1,116 @@
+.singIn_block {
+  width: 100%;
+  .singIn_block_maintitle {
+    font-size: 24px;
+    font-weight: 500;
+    color: #0044cb;
+    margin-bottom: 10px;
+  }
+  .singIn_block_subtitle {
+    color: rgb(143, 144, 146);
+    margin-bottom: 8px;
+  }
+  .singIn_block_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .singIn_block_content_input_wrapper {
+      position: relative;
+      .input_icon {
+        position: absolute;
+        top: 18px;
+        left: 12px;
+        font-size: 12px;
+      }
+      .input_icon_eye {
+        position: absolute;
+        top: 18px;
+        right: 12px;
+        font-size: 14px;
+        cursor: pointer;
+        &:hover {
+          color: #0044cb;
+        }
+      }
+      .singIn_block_content_input {
+        width: 250px;
+        padding: 10px 27px 10px 32px;
+        border-radius: 4px;
+        background: #fff;
+        border: 1px solid #ced4da;
+        margin: 5px 0;
+        &::placeholder {
+          color: #8f9092;
+        }
+        &:focus {
+          outline: none;
+          border-color: rgba(144, 145, 146, 0.5);
+          &::placeholder {
+            color: transparent;
+          }
+        }
+      }
+    }
+    .singIn_block_submit {
+      border: 1px solid #0044cb;
+      background: #0044cb;
+      color: #fff;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin-top: 85px;
+      cursor: pointer;
+      width: 100%;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    .singIn_block_content_assent {
+      font-size: 12px;
+      text-align: center;
+      margin: 0 5px;
+      span {
+        color: #8f9092;
+      }
+    }
+    .singIn_block_content_account {
+      font-size: 10px;
+      color: #8f9092;
+      margin-top: 10px;
+      span {
+        color: #0044cb;
+        text-decoration: underline;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+    }
+    .singIn_block_content_remember {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      width: 100%;
+      label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+      .input {
+        font-size: 16px;
+        color: #8f9092;
+        margin-right: 5px;
+        margin-top: 3px;
+      }
+      .input_check {
+        color: #0044cb;
+        font-size: 16px;
+        margin-right: 5px;
+        margin-top: 3px;
+      }
+      .checkbox {
+        display: none;
+      }
+    }
+  }
+}

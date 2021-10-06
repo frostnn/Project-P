@@ -1,0 +1,90 @@
+.singup_block {
+  width: 100%;
+  .singup_block_maintitle {
+    font-size: 24px;
+    font-weight: 500;
+    color: #0044cb;
+    margin-bottom: 10px;
+  }
+  .singup_block_subtitle {
+    color: rgb(143, 144, 146);
+    margin-bottom: 8px;
+  }
+  .singup_block_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .singup_block_content_input_wrapper {
+      position: relative;
+      .input_icon {
+        position: absolute;
+        top: 18px;
+        left: 12px;
+        font-size: 12px;
+      }
+      .input_icon_eye {
+        position: absolute;
+        top: 18px;
+        right: 12px;
+        font-size: 14px;
+        cursor: pointer;
+        &:hover {
+          color: #0044cb;
+        }
+      }
+      .singup_block_content_input {
+        width: 250px;
+        padding: 10px 27px 10px 32px;
+        border-radius: 4px;
+        background: #fff;
+        border: 1px solid #ced4da;
+        margin: 5px 0;
+        &::placeholder {
+          color: #8f9092;
+        }
+        &:focus {
+          outline: none;
+          border-color: rgba(144, 145, 146, 0.5);
+          &::placeholder {
+            color: transparent;
+          }
+        }
+      }
+    }
+    .singup_block_submit {
+      border: 1px solid #0044cb;
+      background: #0044cb;
+      color: #fff;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin-top: 15px;
+      cursor: pointer;
+      width: 100%;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    .singup_block_content_assent {
+      font-size: 12px;
+      text-align: center;
+      margin: 0 5px;
+      span {
+        color: #8f9092;
+      }
+    }
+    .singup_block_content_account {
+      font-size: 10px;
+      color: #8f9092;
+      margin-top: 10px;
+
+      span {
+        color: #0044cb;
+        text-decoration: underline;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
