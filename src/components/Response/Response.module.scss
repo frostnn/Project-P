@@ -1,0 +1,22 @@
+.response_block {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 11px 5px;
+  display: flex;
+  align-items: center;
+  svg {
+    font-size: 18px;
+    margin-right: 5px;
+  }
+}
+.alert {
+  background: #f44336;
+}
+.success {
+  background: #4caf50;
+}

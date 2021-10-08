@@ -13,7 +13,7 @@ const Authentication: React.FC = () => {
       <div className={style.authentication_block_content}>
         {!toggle && (
           <div className={style.authentication_block_content_wrapper}>
-            <div className={style.authentication_block_content_title}>The best site for you</div>
+            <div className={style.authentication_block_content_title}></div>
             <div className={style.authentication_block_content_btn_wrapper}>
               <button
                 className={style.authentication_block_content_btn_singup}

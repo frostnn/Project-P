@@ -3,6 +3,7 @@ import { AiOutlineMail, AiOutlineEye, AiOutlineCheckCircle } from 'react-icons/a
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import React from 'react';
+import ButtonBack from '../ButtonBack/ButtonBack';
 
 interface iInput {
   type: string;
@@ -19,13 +20,13 @@ const SingIn: React.FC<iSingIn> = ({ toggleAuth }) => {
 
   const visibilityPassword = (index: number) => {
     const input = document.querySelectorAll<HTMLInputElement>(
-      '.singIn_singIn_block_content_input__3xTgd',
+      '.SingIn_singIn_block_content_input__24oUm',
     );
     input[index].setAttribute('type', 'text');
   };
   const hidePassword = (index: number) => {
     const input = document.querySelectorAll<HTMLInputElement>(
-      '.singIn_singIn_block_content_input__3xTgd',
+      '.SingIn_singIn_block_content_input__24oUm',
     );
     input[index].setAttribute('type', 'password');
   };
@@ -45,9 +46,7 @@ const SingIn: React.FC<iSingIn> = ({ toggleAuth }) => {
 
   return (
     <div className={style.singIn_block}>
-      <div>
-        <button onClick={() => toggleAuth(null)}>Назад</button>
-      </div>
+      <ButtonBack toggleAuth={toggleAuth} />
       <div className={style.singIn_block_title}>
         <div className={style.singIn_block_maintitle}>Welcome back</div>
         <div className={style.singIn_block_subtitle}>Login to your account</div>

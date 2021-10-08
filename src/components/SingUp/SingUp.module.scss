@@ -44,11 +44,24 @@
         }
         &:focus {
           outline: none;
-          border-color: rgba(144, 145, 146, 0.5);
+          border-color: #90919280;
           &::placeholder {
             color: transparent;
           }
         }
+      }
+      .error_input {
+        border: 1px solid #f44336;
+        &:focus {
+          outline: none;
+          border-color: #f44336;
+        }
+      }
+      .icon_error {
+        color: #f44336;
+      }
+      .show_password {
+        color: #0044cb;
       }
     }
     .singup_block_submit {
@@ -57,11 +70,18 @@
       color: #fff;
       border-radius: 4px;
       padding: 8px 12px;
-      margin-top: 15px;
+      margin-top: 56px;
       cursor: pointer;
       width: 100%;
       &:hover {
         opacity: 0.7;
+      }
+    }
+    .singup_block_submit_disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      &:hover {
+        opacity: 0.5;
       }
     }
     .singup_block_content_assent {
