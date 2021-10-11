@@ -28,7 +28,6 @@ const SingIn: React.FC<iSingIn> = ({ toggleAuth }) => {
     password: '',
   });
   const { setLogged, setUserInfo } = React.useContext(Context);
-
   const clickCheckbox = () => (toggleCheckbox ? setToggleCheckbox(false) : setToggleCheckbox(true));
   const visibilityPassword = (index: number) => {
     const input = document.querySelectorAll<HTMLInputElement>(
@@ -92,6 +91,7 @@ const SingIn: React.FC<iSingIn> = ({ toggleAuth }) => {
     }
     setLoading(false);
   };
+
   console.log(userAuth);
   return (
     <div className={style.singIn_block}>

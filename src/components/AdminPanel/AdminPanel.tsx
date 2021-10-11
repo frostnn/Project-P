@@ -3,6 +3,7 @@ import React from 'react';
 import { Context } from '../../Context/Context';
 import { BiMenu } from 'react-icons/bi';
 import { HiOutlineMail, HiOutlineBell } from 'react-icons/hi';
+import { CgClose } from 'react-icons/cg';
 import gnomeDef from '../../assets/img/gnomeDef.png';
 import { Route, Switch } from 'react-router';
 import hr from '../../assets/img/xryha.png';
@@ -31,9 +32,11 @@ interface INavList {
 const AdminPanel: React.FC<IUserLogo> = ({ logo = gnomeDef }: IUserLogo) => {
   const { setLogged } = React.useContext(Context);
   const [activeLink, setActiveLink] = React.useState<number>(0);
+  const [toggleMenu, setToggleMenu] = React.useState<boolean>(false);
   const getActiveLinkIndex = (index: number): void => {
     setActiveLink(index);
   };
+  const toggleMenuList = () => setToggleMenu(!toggleMenu);
   const navList: INavList[] = [
     {
       title: 'Home',
@@ -72,8 +75,8 @@ const AdminPanel: React.FC<IUserLogo> = ({ logo = gnomeDef }: IUserLogo) => {
   return (
     <div className={style.admin_panel}>
       <div className={style.admin_panel_header}>
-        <div className={style.admin_panel_header_nav}>
-          <BiMenu />
+        <div className={style.admin_panel_header_nav} onClick={() => toggleMenuList()}>
+          {!toggleMenu ? <BiMenu /> : <CgClose />}
         </div>
         <div className={style.admin_panel_header_wrapper_icon}>
           <div className={style.admin_panel_header_icon_message}>
@@ -91,25 +94,28 @@ const AdminPanel: React.FC<IUserLogo> = ({ logo = gnomeDef }: IUserLogo) => {
         </div>
       </div>
       <div className={style.admin_panel_content}>
-        <div className={style.admin_panel_nav}>
-          <ul className={style.admin_panel_nav_list}>
-            {navList.map(({ title, icon }, i) => (
-              <li
-                className={classNames(
-                  style.admin_panel_nav_list_item,
-                  activeLink === i && style.admin_panel_nav_list_item_active_link,
-                )}>
-                <NavLink
-                  onClick={() => getActiveLinkIndex(i)}
-                  to={`/login\/${title}`}
-                  activeClassName={style.admin_panel_nav_list_item_active}>
-                  <span>{icon}</span>
-                  <span>{title}</span>
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {toggleMenu && (
+          <div className={style.admin_panel_nav}>
+            <ul className={style.admin_panel_nav_list}>
+              {navList.map(({ title, icon }, i) => (
+                <li
+                  className={classNames(
+                    style.admin_panel_nav_list_item,
+                    activeLink === i && style.admin_panel_nav_list_item_active_link,
+                  )}>
+                  <NavLink
+                    onClick={() => getActiveLinkIndex(i)}
+                    to={`/login\/${title}`}
+                    activeClassName={style.admin_panel_nav_list_item_active}>
+                    <span>{icon}</span>
+                    <span>{title}</span>
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <div className={style.admin_panel_content_page}>
           <Switch>
             {routesConfig.map(({ path, exact, component }, i) => (
