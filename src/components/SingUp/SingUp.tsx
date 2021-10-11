@@ -24,7 +24,7 @@ const SingUp: React.FC<iSingUp> = ({ toggleAuth }) => {
     email: '',
     password: '',
     passwordConfirm: '',
-    user_id: '',
+    confirm_hash: '',
   });
   const [response, setResponse] = React.useState<iResponse | null>(null);
   const [failPassword, setFailPassword] = React.useState<Boolean>(false);
@@ -68,7 +68,7 @@ const SingUp: React.FC<iSingUp> = ({ toggleAuth }) => {
       return userData.passwordConfirm;
     }
   };
-  console.log(addValueInput('Confirm password', 'password'), userData);
+
   const datainput: iInput[] = [
     {
       type: 'text',
@@ -139,7 +139,7 @@ const SingUp: React.FC<iSingUp> = ({ toggleAuth }) => {
           email: '',
           password: '',
           passwordConfirm: '',
-          user_id: '',
+          confirm_hash: '',
         });
       }
     } catch (error: any) {
@@ -147,11 +147,11 @@ const SingUp: React.FC<iSingUp> = ({ toggleAuth }) => {
     }
     setLoading(false);
   };
-  /*   React.useEffect(() => {
+  React.useEffect(() => {
     setTimeout(() => {
       setResponse(null);
     }, 4000);
-  }, [response]); */
+  }, [response]);
 
   return (
     <div className={style.singup_block}>
@@ -187,7 +187,7 @@ const SingUp: React.FC<iSingUp> = ({ toggleAuth }) => {
               </div>
             )}
             {i === 3 && failPassword && userData.password && userData.passwordConfirm && (
-              <AlertPassword />
+              <AlertPassword textAlert={'Пароли не совпадают'} />
             )}
           </div>
         ))}

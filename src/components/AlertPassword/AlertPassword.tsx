@@ -1,12 +1,14 @@
 import style from '../AlertPassword/AlertPassword.module.scss';
 import { TiWarningOutline } from 'react-icons/ti';
 import React from 'react';
-
-const AlertPassword: React.FC = () => {
+interface ITextAlert {
+  textAlert: string;
+}
+const AlertPassword: React.FC<ITextAlert> = ({ textAlert = 'Ошибка!' }: ITextAlert) => {
   return (
     <div className={style.alert_block}>
       <TiWarningOutline />
-      <div>Пароли не совпадают</div>
+      <div>{textAlert}</div>
     </div>
   );
 };

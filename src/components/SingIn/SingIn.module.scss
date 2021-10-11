@@ -64,6 +64,13 @@
         opacity: 0.7;
       }
     }
+    .singIn_block_submit_disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
     .singIn_block_content_assent {
       font-size: 12px;
       text-align: center;
