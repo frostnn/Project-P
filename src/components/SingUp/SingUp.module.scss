@@ -3,7 +3,7 @@
   .singup_block_maintitle {
     font-size: 24px;
     font-weight: 500;
-    color: #0044cb;
+    color: #252935;
     margin-bottom: 10px;
   }
   .singup_block_subtitle {
@@ -29,7 +29,7 @@
         font-size: 14px;
         cursor: pointer;
         &:hover {
-          color: #0044cb;
+          color: #4bbf84;
         }
       }
       .singup_block_content_input {
@@ -61,12 +61,12 @@
         color: #f44336;
       }
       .show_password {
-        color: #0044cb;
+        color: #4bbf84;
       }
     }
     .singup_block_submit {
-      border: 1px solid #0044cb;
-      background: #0044cb;
+      border: 1px solid #252935;
+      background: #252935;
       color: #fff;
       border-radius: 4px;
       padding: 8px 12px;
@@ -98,7 +98,7 @@
       margin-top: 10px;
 
       span {
-        color: #0044cb;
+        color: #252935;
         text-decoration: underline;
         cursor: pointer;
         &:hover {

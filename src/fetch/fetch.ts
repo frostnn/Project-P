@@ -8,6 +8,7 @@ export interface iUser {
 }
 export interface iAuthUser {
   id: number;
+  email: string;
   name: string;
   confirmed: boolean;
 }

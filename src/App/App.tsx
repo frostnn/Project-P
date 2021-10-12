@@ -8,7 +8,12 @@ import { iAuthUser } from '../fetch/fetch';
 
 const Main = () => {
   const [logged, setLogged] = React.useState<Boolean>(false);
-  const [userInfo, setUserInfo] = React.useState<iAuthUser>({ id: 0, name: '', confirmed: false });
+  const [userInfo, setUserInfo] = React.useState<iAuthUser>({
+    id: 0,
+    name: '',
+    email: '',
+    confirmed: false,
+  });
   return (
     <Context.Provider value={{ logged, setLogged, userInfo, setUserInfo }}>
       <div className={style.main_block}>

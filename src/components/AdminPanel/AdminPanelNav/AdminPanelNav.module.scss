@@ -1,0 +1,80 @@
+.admin_panel_nav {
+  max-width: 180px;
+  height: 100vh;
+  padding: 10px;
+  background: #252935;
+  margin: 10px 10px 0 0;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: left;
+  .admin_panel_header_info_acc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+    .admin_panel_header_name {
+      margin-top: 10px;
+    }
+  }
+  .admin_panel_nav_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: unset;
+    .admin_panel_nav_list_item {
+      cursor: pointer;
+      border: 2px solid transparent;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      transition: 0.3s;
+      span {
+        display: flex;
+        align-items: center;
+        padding: 0 5px;
+      }
+      &:hover {
+        transition: 0.3s;
+        border-left: 2px solid #d8a20f;
+        color: #4bbf84;
+      }
+      a {
+        display: flex;
+        font-weight: 500;
+        color: #fff;
+        text-decoration: none;
+        transition: 0.3s;
+        &:hover {
+          transition: 0.3s;
+          color: #4bbf84;
+        }
+      }
+
+      .admin_panel_nav_list_item_active {
+        color: #4bbf84;
+      }
+    }
+    .admin_panel_nav_list_item_active_link {
+      border-left: 2px solid #d8a20f;
+    }
+  }
+  .admin_panel_header_icon_logo {
+    border-radius: 50%;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    transition: 0.3s;
+    &:hover {
+      transition: 0.3s;
+      border: 2px solid #4bbf84;
+    }
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+  }
+}

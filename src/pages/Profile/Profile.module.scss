@@ -1,18 +1,38 @@
-.btn_back_wrapper {
-  button {
-    background: transparent;
-    border: 1px solid #8f9092;
+.profile_block {
+  .profile_block_content_avatar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    img {
+      max-width: 250px;
+      border: 3px solid #4bbf84;
+      border-radius: 50%;
+    }
+  }
+  .input_file {
+    display: none;
+  }
+  .profile_block_content_avatar_edit_btn {
+    color: #bfbeba;
+    background: #5e606d;
+    border: none;
     border-radius: 4px;
     display: flex;
     align-items: center;
-    padding: 3px;
+    padding: 7px 8px 5px 8px;
     font-size: 16px;
-    color: #8f9092;
     cursor: pointer;
     position: absolute;
+    bottom: 20px;
+    left: calc(50% - 103px);
     &:hover {
-      background: #8f9092;
       color: #fff;
+      background: #4bbf84;
+    }
+    svg {
+      margin-right: 4px;
+      font-size: 16px;
     }
   }
 }

@@ -3,115 +3,16 @@
   max-width: 1180px;
   margin: 0 auto;
 
-  .admin_panel_header {
-    color: #b0b1af;
+  .admin_panel_content {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 10px;
+  }
+
+  .admin_panel_content_page {
     background: #252935;
+    margin-top: 10px;
     border-radius: 4px;
-    font-size: 20px;
+    width: 100%;
+    height: 100vh;
   }
-  .admin_panel_header_wrapper_icon {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 140px;
-  }
-  .admin_panel_header_icon_gear,
-  .admin_panel_header_nav,
-  .admin_panel_header_icon_bell,
-  .admin_panel_header_icon_message,
-  .admin_panel_header_icon_logo {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    &:hover {
-      color: #4bbf84;
-    }
-  }
-  .admin_panel_header_icon_logo {
-    border-radius: 50%;
-    border: 2px solid transparent;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    max-width: 30px;
-    max-height: 30px;
-    &:hover {
-      border: 2px solid #4bbf84;
-    }
-    img {
-      width: 30px;
-      height: 30px;
-      max-width: 30px;
-      max-height: 30px;
-      border-radius: 50%;
-    }
-  }
-}
-.admin_panel_content {
-  display: flex;
-  justify-content: space-between;
-}
-.admin_panel_nav {
-  max-width: 180px;
-  height: 100vh;
-  padding: 10px;
-  background: #252935;
-  margin: 10px 10px 0 0;
-  border-radius: 4px;
-  font-size: 14px;
-  text-align: left;
-  .admin_panel_nav_list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: unset;
-    .admin_panel_nav_list_item {
-      cursor: pointer;
-      border: 2px solid transparent;
-      padding: 10px;
-
-      display: flex;
-      align-items: center;
-      span {
-        display: flex;
-        align-items: center;
-        padding: 0 5px;
-      }
-      &:hover {
-        border-left: 2px solid #d8a20f;
-        color: #4bbf84;
-      }
-
-      a {
-        display: flex;
-        font-weight: 500;
-        color: #fff;
-        text-decoration: none;
-        &:hover {
-          color: #4bbf84;
-        }
-      }
-
-      .admin_panel_nav_list_item_active {
-        color: #4bbf84;
-      }
-    }
-    .admin_panel_nav_list_item_active_link {
-      border-left: 2px solid #d8a20f;
-    }
-  }
-}
-.admin_panel_content_page {
-  background: #252935;
-  margin-top: 10px;
-  border-radius: 4px;
-  width: 100%;
-  height: 100vh;
 }

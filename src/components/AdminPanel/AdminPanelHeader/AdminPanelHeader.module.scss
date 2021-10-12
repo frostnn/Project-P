@@ -1,0 +1,86 @@
+.admin_panel_header {
+  color: #b0b1af;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background: #252935;
+  border-radius: 4px;
+  font-size: 20px;
+  .admin_panel_header_wrapper_icon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90px;
+  }
+
+  .admin_panel_header_nav,
+  .admin_panel_header_icon_bell,
+  .admin_panel_header_icon_message,
+  .admin_panel_header_icon_logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      transition: 0.3s;
+      color: #4bbf84;
+    }
+  }
+  .admin_panel_header_icon_gear {
+    transition: 0.3s;
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    svg {
+      transition: 0.3s;
+      &:hover {
+        transform: rotate(90deg);
+        transition: 0.3s;
+        color: #4bbf84;
+      }
+    }
+    .admin_panel_header_dasboard {
+      position: absolute;
+      background: #252935;
+      border-radius: 4px;
+      font-size: 14px;
+      bottom: -129px;
+      left: -22px;
+      padding: 10px;
+      box-shadow: 1px 0px 10px 2px rgba(75, 191, 132, 0.2);
+      .admin_panel_header_dasboard_list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        .admin_panel_header_dasboard_list_item {
+          padding: 5px;
+          margin: 4px 0;
+          transition: 0.3s;
+          border-left: 2px solid transparent;
+          color: #fff;
+          a {
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s;
+            &:hover {
+              transition: 0.3s;
+              color: #4bbf84;
+            }
+          }
+          &:hover {
+            border-left: 2px solid #d8a20f;
+            transition: 0.3s;
+            color: #4bbf84;
+          }
+        }
+      }
+    }
+  }
+  .active {
+    svg {
+      color: #4bbf84;
+    }
+  }
+}
