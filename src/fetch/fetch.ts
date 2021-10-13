@@ -11,6 +11,9 @@ export interface iAuthUser {
   email: string;
   name: string;
   confirmed: boolean;
+  address: string;
+  phone: string;
+  last_name: string;
 }
 export interface iResponse {
   status: string;

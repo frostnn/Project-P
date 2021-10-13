@@ -1,18 +1,3 @@
-.btn_back_wrapper {
-  button {
-    background: transparent;
-    border: 1px solid #8f9092;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    padding: 3px;
-    font-size: 16px;
-    color: #8f9092;
-    cursor: pointer;
-    position: absolute;
-    &:hover {
-      background: #8f9092;
-      color: #fff;
-    }
-  }
+.home_block {
+  text-align: center;
 }

@@ -13,6 +13,9 @@ const Main = () => {
     name: '',
     email: '',
     confirmed: false,
+    address: '',
+    phone: '',
+    last_name: '',
   });
   return (
     <Context.Provider value={{ logged, setLogged, userInfo, setUserInfo }}>

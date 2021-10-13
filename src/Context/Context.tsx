@@ -9,7 +9,7 @@ interface IState {
 }
 export const Context = React.createContext<IState>({
   logged: false,
-  userInfo: { id: 0, name: '', email: '', confirmed: false },
+  userInfo: { id: 0, name: '', email: '', confirmed: false, address: '', phone: '', last_name: '' },
   setLogged: () => {},
   setUserInfo: () => {},
 });

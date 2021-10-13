@@ -3,13 +3,10 @@
   background: transparent;
   border-radius: 5px;
   padding: 10px;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 100%;
   .authentication_block_content {
     background: #fff;
     border-radius: 5px;

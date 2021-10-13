@@ -1,7 +1,9 @@
 .main_block {
   background: url('../assets/img/geometriya.jpg');
-  text-align: center;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /*  background: #1e202d; */
+  width: 100%;
+
+  min-height: 655px;
 }
