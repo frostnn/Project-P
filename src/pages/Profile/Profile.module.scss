@@ -21,9 +21,10 @@
   .input_file {
     display: none;
   }
+  .profile_block_content_avatar_save_btn,
   .profile_block_content_avatar_edit_btn {
-    color: #bfbeba;
-    background: #5e606d;
+    color: #fff;
+    background: #f0555c;
     border: none;
     border-radius: 4px;
     display: flex;
@@ -34,14 +35,23 @@
     position: absolute;
     bottom: 20px;
     left: calc(50% - 103px);
+    transition: 0.3s;
     &:hover {
-      color: #fff;
-      background: #4bbf84;
+      color: #bfbeba;
+      background: #5e606d;
     }
     svg {
       margin-right: 4px;
       font-size: 16px;
     }
+  }
+  .profile_block_content_avatar_save_btn {
+    color: #fff;
+    background: #4bbf84;
+    left: calc(50% - 102px);
+    bottom: -16px;
+    width: 62px;
+    justify-content: center;
   }
   .profile_block_content_info_wrapper {
     display: flex;
@@ -73,6 +83,7 @@
       border: 2px solid transparent;
       margin: 10px 0;
       min-height: 19px;
+      transition: 0.3s;
       &:focus {
         outline: none;
         border: 2px solid #4bbf84;
@@ -92,6 +103,11 @@
     padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      color: #bfbeba;
+      background: #5e606d;
+    }
   }
   .info_save_btn {
     background: #4bbf84;

@@ -15,6 +15,7 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
   const { userInfo, setUserInfo } = React.useContext(Context);
   const [responseUpdate, setResponseUpdate] = React.useState<string>('');
   const [disabledBtnSave, setDisabledBtnSave] = React.useState<boolean>(false);
+  const [visibilityBtnSaveAvatar, setVisibilityBtnSaveAvatar] = React.useState<boolean>(false);
   const clickInputFile = () => {
     if (inputFile.current) {
       inputFile.current.click();
@@ -52,6 +53,7 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
       };
       reader.readAsDataURL(files);
     }
+    setVisibilityBtnSaveAvatar(true);
   };
   const saveAvatar = async () => {
     if (userInfo.email) {
@@ -59,6 +61,9 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
     } else {
       console.log('Вы забыли емайл');
     }
+    setTimeout(() => {
+      setVisibilityBtnSaveAvatar(false);
+    }, 500);
   };
   React.useEffect(() => {
     setTimeout(() => {
@@ -208,7 +213,13 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
               ref={inputFile}
               onChange={getUrlImg}
             />
-            <button onClick={() => saveAvatar()}>Save</button>
+            {visibilityBtnSaveAvatar && (
+              <button
+                onClick={() => saveAvatar()}
+                className={style.profile_block_content_avatar_save_btn}>
+                Save
+              </button>
+            )}
           </div>
         </div>
       </div>
