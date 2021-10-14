@@ -12,7 +12,8 @@
     position: relative;
     width: 465px;
     img {
-      max-width: 220px;
+      width: 220px;
+      height: 220px;
       border: 3px solid #4bbf84;
       border-radius: 50%;
     }
@@ -71,11 +72,16 @@
       font-size: 16px;
       border: 2px solid transparent;
       margin: 10px 0;
+      min-height: 19px;
       &:focus {
         outline: none;
         border: 2px solid #4bbf84;
       }
     }
+  }
+  .info_btn_wrapper {
+    display: flex;
+    align-items: center;
   }
   .info_save_btn,
   .info_close_btn,
@@ -90,6 +96,14 @@
   .info_save_btn {
     background: #4bbf84;
     margin-right: 10px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+  }
+  .disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
   .info_close_btn {
     background: #fcb72c;

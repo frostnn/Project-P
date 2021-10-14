@@ -8,6 +8,7 @@ import { iAuthUser } from '../fetch/fetch';
 
 const Main = () => {
   const [logged, setLogged] = React.useState<Boolean>(false);
+
   const [userInfo, setUserInfo] = React.useState<iAuthUser>({
     id: 0,
     name: '',
@@ -16,6 +17,7 @@ const Main = () => {
     address: '',
     phone: '',
     last_name: '',
+    avatar: '',
   });
   return (
     <Context.Provider value={{ logged, setLogged, userInfo, setUserInfo }}>

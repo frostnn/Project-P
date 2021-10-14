@@ -1,4 +1,4 @@
-import { API_CREATE_USER, API_AUTH_USER } from '../constants/constants';
+import { API_CREATE_USER, API_AUTH_USER, API_UPDATE_USER } from '../constants/constants';
 export interface iUser {
   name: string;
   email: string;
@@ -14,6 +14,7 @@ export interface iAuthUser {
   address: string;
   phone: string;
   last_name: string;
+  avatar: string;
 }
 export interface iResponse {
   status: string;
@@ -46,6 +47,25 @@ export const authUser = async (data: iAuthUserData): Promise<iAuthUser | string>
   try {
     const res = await fetch(API_AUTH_USER, {
       method: 'POST',
+      headers: {
+        Origin: 'http://localhost:8080/',
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}`);
+    }
+    return await res.json();
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const updateUser = async (data: iAuthUser): Promise<string> => {
+  try {
+    const res = await fetch(API_UPDATE_USER, {
+      method: 'PUT',
       headers: {
         Origin: 'http://localhost:8080/',
         'Content-Type': 'application/json;charset=utf-8',

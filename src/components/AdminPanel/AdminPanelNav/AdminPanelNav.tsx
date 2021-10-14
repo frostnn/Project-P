@@ -67,7 +67,7 @@ const AdminPanelNav: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
     <div className={style.admin_panel_nav}>
       <div className={style.admin_panel_header_info_acc}>
         <div className={style.admin_panel_header_icon_logo}>
-          <img src={logo} alt="avatar" />
+          <img src={userInfo.avatar ? userInfo.avatar : logo} alt="avatar" />
         </div>
         <div className={style.admin_panel_header_name}>{userInfo.name}</div>
       </div>
