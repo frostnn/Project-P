@@ -72,7 +72,15 @@
         margin-right: 10px;
       }
     }
-
+    .profile_block_content_info_social {
+      display: flex;
+      flex-wrap: wrap;
+      width: 454px;
+      justify-content: space-between;
+      label {
+        width: 222px;
+      }
+    }
     .profile_block_content_info_input {
       border: none;
       color: #bfbeba;
@@ -93,7 +101,9 @@
   .info_btn_wrapper {
     display: flex;
     align-items: center;
+    position: relative;
   }
+  .info_social_btn,
   .info_save_btn,
   .info_close_btn,
   .info_edit_btn {
@@ -123,5 +133,9 @@
   }
   .info_close_btn {
     background: #fcb72c;
+  }
+  .info_social_btn {
+    background: #875fbf;
+    margin-left: 10px;
   }
 }

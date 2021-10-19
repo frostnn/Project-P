@@ -18,7 +18,16 @@ const Main = () => {
     phone: '',
     last_name: '',
     avatar: '',
+    telegram: '',
+    facebook: '',
+    twitter: '',
+    linkedIn: '',
+    github: '',
+    instagram: '',
+    gitlab: '',
+    snapchat: '',
   });
+  console.log(userInfo);
   return (
     <Context.Provider value={{ logged, setLogged, userInfo, setUserInfo }}>
       <div className={style.main_block}>

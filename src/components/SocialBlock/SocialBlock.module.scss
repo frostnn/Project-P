@@ -1,0 +1,39 @@
+.social_block {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 170px;
+  justify-content: center;
+  border: 1px solid #5e606d;
+  border-radius: 4px;
+  padding: 6px 0;
+  background: #252935;
+  right: -35px;
+  top: 43px;
+  .social_block_item {
+    border: 1px solid #5e606d;
+    color: #bfbeba;
+    padding: 5px;
+    font-size: 22px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 3px;
+    &:hover {
+      background: #5e606d;
+      color: #fff;
+    }
+  }
+  .social_check {
+    background: #4bbf84;
+    border: 1px solid #4bbf84;
+    color: #fff;
+    &:hover {
+      background: #4bbf84;
+    }
+  }
+}

@@ -3,19 +3,78 @@ import React from 'react';
 import { IUserLogo } from '../../components/AdminPanel/AdminPanelNav/AdminPanelNav';
 import gnomeDef from '../../assets/img/gnomeDef.png';
 import { MdOutlineModeEdit } from 'react-icons/md';
+import {
+  AiOutlineGithub,
+  AiOutlineFacebook,
+  AiOutlineTwitter,
+  AiOutlineLinkedin,
+  AiOutlineInstagram,
+  AiOutlineGitlab,
+} from 'react-icons/ai';
+import { FaTelegramPlane, FaSnapchatGhost } from 'react-icons/fa';
 import classNames from 'classnames';
 import { Context } from '../../Context/Context';
 import { updateUser } from '../../fetch/fetch';
 import Response from '../../components/Response/Response';
 import Loading from '../../assets/img/loading.svg';
+import SocialBlock from '../../components/SocialBlock/SocialBlock';
+
+export interface iSocial {
+  social: string;
+  icon: React.FunctionComponentElement<any>;
+  selected: boolean;
+}
 
 const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
   const inputFile = React.useRef<HTMLInputElement>(null);
   const [toggleEdit, setToggleEdit] = React.useState<boolean>(false);
+  const [toggleSocial, setToggleSocial] = React.useState<boolean>(false);
   const { userInfo, setUserInfo } = React.useContext(Context);
   const [responseUpdate, setResponseUpdate] = React.useState<string>('');
   const [disabledBtnSave, setDisabledBtnSave] = React.useState<boolean>(false);
   const [visibilityBtnSaveAvatar, setVisibilityBtnSaveAvatar] = React.useState<boolean>(false);
+  const [socialItems, setSocialItems] = React.useState<iSocial[]>([
+    {
+      social: 'Telegram',
+      icon: <FaTelegramPlane />,
+      selected: false,
+    },
+    {
+      social: 'Facebook',
+      icon: <AiOutlineFacebook />,
+      selected: false,
+    },
+    {
+      social: 'Twitter',
+      icon: <AiOutlineTwitter />,
+      selected: false,
+    },
+    {
+      social: 'LinkedIn',
+      icon: <AiOutlineLinkedin />,
+      selected: false,
+    },
+    {
+      social: 'Instagram',
+      icon: <AiOutlineInstagram />,
+      selected: false,
+    },
+    {
+      social: 'Github',
+      icon: <AiOutlineGithub />,
+      selected: false,
+    },
+    {
+      social: 'Gitlab',
+      icon: <AiOutlineGitlab />,
+      selected: false,
+    },
+    {
+      social: 'Snapchat',
+      icon: <FaSnapchatGhost />,
+      selected: false,
+    },
+  ]);
   const clickInputFile = () => {
     if (inputFile.current) {
       inputFile.current.click();
@@ -24,7 +83,7 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
   const getNewDataProfile = (e: React.ChangeEvent<HTMLInputElement>, name: string): void => {
     setUserInfo({
       ...userInfo,
-      [name]: e.target.value,
+      [name.toLocaleLowerCase()]: e.target.value,
     });
   };
   const updateProfile = async () => {
@@ -38,7 +97,14 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
     setDisabledBtnSave(false);
   };
   const toggleEditProfile = () => setToggleEdit(!toggleEdit);
-
+  const toggleSocialBlock = () => setToggleSocial(!toggleSocial);
+  const countAddSocial = () => {
+    const countSocial = socialItems.filter((item) => item.selected).length;
+    if (countSocial > 0) {
+      return countSocial;
+    }
+    return '';
+  };
   const getUrlImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const files = e.target.files[0];
@@ -120,6 +186,19 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
                   {userInfo.address}
                 </div>
               </label>
+              <div className={style.profile_block_content_info_social}>
+                {socialItems.map(
+                  ({ social, selected }, i) =>
+                    selected && (
+                      <label key={`${social}_${i}`}>
+                        {social}
+                        <div className={style.profile_block_content_info_input}>
+                          {userInfo[social.toLocaleLowerCase()]}
+                        </div>
+                      </label>
+                    ),
+                )}
+              </div>
               <button className={style.info_edit_btn} onClick={() => toggleEditProfile()}>
                 Edit profile
               </button>
@@ -186,6 +265,24 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
                   className={style.profile_block_content_info_input}
                 />
               </label>
+              <div className={style.profile_block_content_info_social}>
+                {socialItems.map(
+                  ({ social, selected }) =>
+                    selected && (
+                      <label key={social}>
+                        {social}
+                        <input
+                          type="text"
+                          name=""
+                          onChange={(e) => getNewDataProfile(e, social)}
+                          value={userInfo[social.toLocaleLowerCase()] as string}
+                          className={style.profile_block_content_info_input}
+                        />
+                      </label>
+                    ),
+                )}
+              </div>
+
               <div className={style.info_btn_wrapper}>
                 <button
                   className={classNames(style.info_save_btn, disabledBtnSave && style.disabled)}
@@ -195,6 +292,12 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
                 <button className={style.info_close_btn} onClick={() => toggleEditProfile()}>
                   Close
                 </button>
+                <button className={style.info_social_btn} onClick={() => toggleSocialBlock()}>
+                  {toggleSocial ? `Selected social ${countAddSocial()}` : 'Add social'}
+                </button>
+                {toggleSocial && (
+                  <SocialBlock socialItems={socialItems} setSocialItems={setSocialItems} />
+                )}
               </div>
             </div>
           )}

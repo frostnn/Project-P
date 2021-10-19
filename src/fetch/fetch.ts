@@ -7,6 +7,7 @@ export interface iUser {
   confirm_hash: string;
 }
 export interface iAuthUser {
+  [key: string]: string | number | boolean;
   id: number;
   email: string;
   name: string;
@@ -15,6 +16,14 @@ export interface iAuthUser {
   phone: string;
   last_name: string;
   avatar: string;
+  telegram: string;
+  facebook: string;
+  twitter: string;
+  linkedIn: string;
+  github: string;
+  instagram: string;
+  gitlab: string;
+  snapchat: string;
 }
 export interface iResponse {
   status: string;
