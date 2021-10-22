@@ -29,7 +29,7 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
   const inputFile = React.useRef<HTMLInputElement>(null);
   const [toggleEdit, setToggleEdit] = React.useState<boolean>(false);
   const [toggleSocial, setToggleSocial] = React.useState<boolean>(false);
-  const { userInfo, setUserInfo } = React.useContext(Context);
+  const { userInfo, setUserInfo, setPercentProfile } = React.useContext(Context);
   const [responseUpdate, setResponseUpdate] = React.useState<string>('');
   const [disabledBtnSave, setDisabledBtnSave] = React.useState<boolean>(false);
   const [visibilityBtnSaveAvatar, setVisibilityBtnSaveAvatar] = React.useState<boolean>(false);
@@ -37,44 +37,57 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
     {
       social: 'Telegram',
       icon: <FaTelegramPlane />,
-      selected: false,
+      selected: userInfo.telegram ? true : false,
     },
     {
       social: 'Facebook',
       icon: <AiOutlineFacebook />,
-      selected: false,
+      selected: userInfo.facebook ? true : false,
     },
     {
       social: 'Twitter',
       icon: <AiOutlineTwitter />,
-      selected: false,
+      selected: userInfo.twitter ? true : false,
     },
     {
       social: 'LinkedIn',
       icon: <AiOutlineLinkedin />,
-      selected: false,
+      selected: userInfo.linkedin ? true : false,
     },
     {
       social: 'Instagram',
       icon: <AiOutlineInstagram />,
-      selected: false,
+      selected: userInfo.instagram ? true : false,
     },
     {
       social: 'Github',
       icon: <AiOutlineGithub />,
-      selected: false,
+      selected: userInfo.github ? true : false,
     },
     {
       social: 'Gitlab',
       icon: <AiOutlineGitlab />,
-      selected: false,
+      selected: userInfo.gitlab ? true : false,
     },
     {
       social: 'Snapchat',
       icon: <FaSnapchatGhost />,
-      selected: false,
+      selected: userInfo.snapchat ? true : false,
     },
   ]);
+  const countPercent = () => {
+    let n = 0;
+    for (const key in userInfo) {
+      if (key !== 'id' && key !== 'avatar' && key !== 'confirmed') {
+        if (userInfo[key]) {
+          n++;
+        }
+      }
+    }
+    const x = (n * 100) / 13;
+    setPercentProfile(x);
+  };
+
   const clickInputFile = () => {
     if (inputFile.current) {
       inputFile.current.click();
@@ -136,7 +149,10 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
       setResponseUpdate('');
     }, 4000);
   }, [responseUpdate]);
-  console.log(userInfo);
+
+  React.useEffect(() => {
+    countPercent();
+  }, [userInfo]);
   return (
     <div className={style.profile_block}>
       <h1>Profile</h1>
@@ -301,7 +317,6 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
               </div>
             </div>
           )}
-
           <div className={style.profile_block_content_avatar}>
             <img src={userInfo.avatar ? userInfo.avatar : logo} alt="" />
             <button

@@ -7,7 +7,7 @@ export interface iUser {
   confirm_hash: string;
 }
 export interface iAuthUser {
-  [key: string]: string | number | boolean;
+  [key: string]: any;
   id: number;
   email: string;
   name: string;
@@ -19,7 +19,7 @@ export interface iAuthUser {
   telegram: string;
   facebook: string;
   twitter: string;
-  linkedIn: string;
+  linkedin: string;
   github: string;
   instagram: string;
   gitlab: string;

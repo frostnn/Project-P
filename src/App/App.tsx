@@ -8,7 +8,7 @@ import { iAuthUser } from '../fetch/fetch';
 
 const Main = () => {
   const [logged, setLogged] = React.useState<Boolean>(false);
-
+  const [percentProfile, setPercentProfile] = React.useState<Number>(0);
   const [userInfo, setUserInfo] = React.useState<iAuthUser>({
     id: 0,
     name: '',
@@ -21,15 +21,16 @@ const Main = () => {
     telegram: '',
     facebook: '',
     twitter: '',
-    linkedIn: '',
+    linkedin: '',
     github: '',
     instagram: '',
     gitlab: '',
     snapchat: '',
   });
-  console.log(userInfo);
+
   return (
-    <Context.Provider value={{ logged, setLogged, userInfo, setUserInfo }}>
+    <Context.Provider
+      value={{ logged, setLogged, userInfo, setUserInfo, percentProfile, setPercentProfile }}>
       <div className={style.main_block}>
         {logged ? <Redirect to={'/login/Home'} /> : <Redirect to={'/'} />}
         <Switch>

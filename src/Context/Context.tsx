@@ -6,9 +6,12 @@ interface IState {
   setLogged: (c: Boolean) => void;
   userInfo: iAuthUser;
   setUserInfo: (c: any) => void;
+  percentProfile: Number;
+  setPercentProfile: (c: any) => void;
 }
 export const Context = React.createContext<IState>({
   logged: false,
+  percentProfile: 0,
   userInfo: {
     id: 0,
     name: '',
@@ -21,7 +24,7 @@ export const Context = React.createContext<IState>({
     telegram: '',
     facebook: '',
     twitter: '',
-    linkedIn: '',
+    linkedin: '',
     github: '',
     instagram: '',
     gitlab: '',
@@ -29,4 +32,5 @@ export const Context = React.createContext<IState>({
   },
   setLogged: () => {},
   setUserInfo: () => {},
+  setPercentProfile: () => {},
 });

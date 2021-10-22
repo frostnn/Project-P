@@ -14,6 +14,7 @@ import {
 } from 'react-icons/ai';
 import { Context } from '../../../Context/Context';
 import gnomeDef from '../../../assets/img/gnomeDef.png';
+import ComplateProfile from '../../ComplateProfile/ComplateProfile';
 
 interface INavList {
   title: string;
@@ -89,6 +90,7 @@ const AdminPanelNav: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
           </li>
         ))}
       </ul>
+      <ComplateProfile />
     </div>
   );
 };
