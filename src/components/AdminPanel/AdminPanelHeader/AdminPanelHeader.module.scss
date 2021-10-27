@@ -11,9 +11,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90px;
+    width: 211px;
   }
-
+  .admin_panel_header_date {
+    font-size: 16px;
+  }
   .admin_panel_header_nav,
   .admin_panel_header_icon_bell,
   .admin_panel_header_icon_message,
@@ -27,6 +29,7 @@
       color: #4bbf84;
     }
   }
+
   .admin_panel_header_icon_gear {
     transition: 0.3s;
     position: relative;

@@ -24,7 +24,7 @@ export interface IUserLogo {
   logo?: string;
 }
 const AdminPanelNav: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
-  const { userInfo } = React.useContext(Context);
+  const { userInfo, percentProfile } = React.useContext(Context);
   const [activeLink, setActiveLink] = React.useState<number>(0);
   const getActiveLinkIndex = (index: number): void => {
     setActiveLink(index);
@@ -90,7 +90,7 @@ const AdminPanelNav: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
           </li>
         ))}
       </ul>
-      <ComplateProfile />
+      {percentProfile !== 100 && <ComplateProfile />}
     </div>
   );
 };

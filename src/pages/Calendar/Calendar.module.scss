@@ -1,0 +1,70 @@
+.calendar_block {
+  margin: 10px;
+  .calendar_block_month {
+    border-radius: 4px;
+    border: 2px solid #5e606d;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .calendar_block_month_item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #5e606d;
+      margin: 3px;
+      border-radius: 4px;
+      padding: 10px;
+      width: 100px;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.7;
+      }
+      &_day {
+        font-size: 26px;
+      }
+
+      &_week {
+        font-size: 12px;
+        padding: 5px 0;
+      }
+      &_month {
+        font-size: 10px;
+      }
+    }
+
+    .current_day {
+      background: #4bbf84;
+    }
+    .weekend {
+      background: #ffffff1a;
+    }
+  }
+  .calendar_block_current_month {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &_wrapper {
+      display: flex;
+      align-items: center;
+    }
+    &_btn {
+      button {
+        border: none;
+        background: none;
+        color: #fff;
+        font-size: 22px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+    &_title {
+      margin: 0 5px;
+    }
+  }
+}

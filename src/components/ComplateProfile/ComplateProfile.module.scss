@@ -48,54 +48,9 @@
     transition: 0.3s;
     font-size: 10px;
     margin-top: 10px;
-    font-weight: 600;
     text-decoration: none;
     &:hover {
       opacity: 0.7;
     }
   }
-}
-.circle_big {
-  position: relative;
-  width: 114px;
-  height: 114px;
-  margin: 30px auto 25px auto;
-}
-
-.circle_big svg {
-  width: 114px;
-  height: 114px;
-}
-
-.circle_big .bg {
-  fill: none;
-  stroke-width: 10px;
-  stroke: #343035;
-}
-
-.circle_big .progress {
-  fill: none;
-  stroke-width: 10px;
-  stroke: #9a0fe0;
-  stroke-linecap: round;
-  stroke-dasharray: 326.56;
-  stroke-dashoffset: 60;
-  transform: rotate(-90deg);
-  transform-origin: 50% 50%;
-  animation: big 1.5s ease-in-out;
-}
-
-.circle_big .text {
-  position: absolute;
-  width: 100%;
-  top: 37px;
-  font-size: 24px;
-  text-align: center;
-  font-weight: 400;
-  line-height: 22px;
-}
-
-.circle_big .text .small {
-  font-size: 14px;
-  color: #fff;
 }

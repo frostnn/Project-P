@@ -7,6 +7,8 @@ import { AiFillSetting } from 'react-icons/ai';
 import classNames from 'classnames';
 import { Context } from '../../../Context/Context';
 import { NavLink } from 'react-router-dom';
+import Time from '../../Time/Time';
+import moment from 'moment';
 interface IToggleMenu {
   toggleMenu: boolean;
   setToggleMenu: (c: boolean) => void;
@@ -16,13 +18,18 @@ const AdminPanelHeader: React.FC<IToggleMenu> = ({ toggleMenu, setToggleMenu }) 
   const { setLogged } = React.useContext(Context);
   const toggleMenuList = (): void => setToggleMenu(!toggleMenu);
   const toggleDasboardList = (): void => setToggleDasboard(!toggleDasboard);
-
+  const date = moment().format('ll');
   return (
     <div className={style.admin_panel_header}>
       <div className={style.admin_panel_header_nav} onClick={() => toggleMenuList()}>
         {!toggleMenu ? <BiMenu /> : <CgClose />}
       </div>
+
       <div className={style.admin_panel_header_wrapper_icon}>
+        <div className={style.admin_panel_header_date}>{date}</div>
+        <div className={style.admin_panel_header_icon_message}>
+          <Time />
+        </div>
         <div className={style.admin_panel_header_icon_message}>
           <HiOutlineMail />
         </div>
