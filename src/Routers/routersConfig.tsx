@@ -2,6 +2,7 @@ import Calendar from '../pages/Calendar/Calendar';
 import Gallery from '../pages/Gallery/Gallery';
 import Home from '../pages/Home/Home';
 import Profile from '../pages/Profile/Profile';
+import Friends from '../pages/Friends/Friends';
 
 const routesConfig = [
   {
@@ -23,6 +24,11 @@ const routesConfig = [
     path: '/login/Calendar',
     exact: true,
     component: Calendar,
+  },
+  {
+    path: '/login/Friends',
+    exact: true,
+    component: Friends,
   },
 ];
 

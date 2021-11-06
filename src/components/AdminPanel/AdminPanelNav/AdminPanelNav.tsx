@@ -11,6 +11,7 @@ import {
   AiOutlineCalendar,
   AiOutlineUnorderedList,
   AiOutlineFileImage,
+  AiOutlineUserAdd,
 } from 'react-icons/ai';
 import { Context } from '../../../Context/Context';
 import gnomeDef from '../../../assets/img/gnomeDef.png';
@@ -35,9 +36,10 @@ const AdminPanelNav: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
       icon: <AiOutlineHome />,
     },
     {
-      title: 'Profile',
-      icon: <AiOutlineUser />,
+      title: 'Friends',
+      icon: <AiOutlineUserAdd />,
     },
+
     {
       title: 'Email',
       icon: <AiOutlineMail />,
@@ -58,6 +60,10 @@ const AdminPanelNav: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
     {
       title: 'Documentations',
       icon: <AiOutlineFile />,
+    },
+    {
+      title: 'Profile',
+      icon: <AiOutlineUser />,
     },
     {
       title: 'Setting',

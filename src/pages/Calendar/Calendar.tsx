@@ -8,14 +8,10 @@ const Calendar: React.FC = () => {
   moment.updateLocale('en', { week: { dow: 1 } });
   const startDay = moment().startOf('month').startOf('week');
   const endDay = moment().endOf('month').endOf('week');
-  const calendar = [];
   const currentDay = moment().format('MMM Do YY');
   const currentMonth = moment().format('MMMM YYYY');
-  const day = startDay.clone();
-  while (!day.isAfter(endDay)) {
-    calendar.push(day.clone());
-    day.add(1, 'day');
-  }
+  const day = startDay.clone().subtract(1, 'day');
+  const calendar = [...Array(42)].map(() => day.add(1, 'day').clone());
   console.log(moment().format());
   return (
     <div className={style.calendar_block}>

@@ -92,7 +92,6 @@ const SingIn: React.FC<iSingIn> = ({ toggleAuth }) => {
     setLoading(false);
   };
 
-  console.log(userAuth);
   return (
     <div className={style.singIn_block}>
       <ButtonBack toggleAuth={toggleAuth} />
