@@ -37,6 +37,7 @@ const Calendar: React.FC = () => {
       <div className={style.calendar_block_month}>
         {calendar.map((item) => (
           <div
+            key={item.format('dddd')}
             className={classNames(
               style.calendar_block_month_item,
               item.format('MMM Do YY') === currentDay && style.current_day,

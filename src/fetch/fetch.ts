@@ -1,4 +1,9 @@
-import { API_CREATE_USER, API_AUTH_USER, API_UPDATE_USER } from '../constants/constants';
+import {
+  API_CREATE_USER,
+  API_AUTH_USER,
+  API_UPDATE_USER,
+  API_FRIENDS_USER,
+} from '../constants/constants';
 export interface iUser {
   name: string;
   email: string;
@@ -33,6 +38,16 @@ export interface iAuthUserData {
   email: string;
   password: string;
 }
+
+export interface iResponseFriends {
+  id_user: number;
+  id_friend: number;
+  email: string;
+  name: string | null;
+  last_name: string | null;
+  avatar: string | null;
+}
+
 export const createUser = async (data: iUser): Promise<iResponse> => {
   try {
     const res = await fetch(API_CREATE_USER, {
@@ -80,6 +95,25 @@ export const updateUser = async (data: iAuthUser): Promise<string> => {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify(data),
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}`);
+    }
+    return await res.json();
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const getFriends = async (id: { id: number }): Promise<iResponseFriends[]> => {
+  try {
+    const res = await fetch(API_FRIENDS_USER, {
+      method: 'POST',
+      headers: {
+        Origin: 'http://localhost:8080/',
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(id),
     });
     if (!res.ok) {
       throw new Error(`${res.status}`);
