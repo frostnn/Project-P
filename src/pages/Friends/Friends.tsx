@@ -3,7 +3,6 @@ import React from 'react';
 import { FaUserFriends } from 'react-icons/fa';
 import { MdRecommend, MdPersonSearch } from 'react-icons/md';
 import MyFrinds from './FriendsTabContent/MyFriends';
-
 import Recommend from './FriendsTabContent/Recommend';
 import Search from './FriendsTabContent/Search';
 interface iActiveClass {
@@ -26,6 +25,9 @@ const FriendsBlockTitle = styled.div`
   display: flex;
   justify-content: space-around;
   width: 400px;
+  background: #1e202d;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
 `;
 const FriendsBlockTitleItem = styled.div<iActiveClass>`
   padding: 10px 20px;
@@ -35,6 +37,7 @@ const FriendsBlockTitleItem = styled.div<iActiveClass>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: 0.3s;
   color: #b0b1af;
   color: ${({ active, i }) => (active === i ? '#4bbf84' : '#b0b1af')};
   border-top: ${({ active, i }) => (active === i ? '2px solid #d8a20f' : '2px solid transparent')};
