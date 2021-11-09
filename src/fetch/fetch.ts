@@ -105,7 +105,7 @@ export const updateUser = async (data: iAuthUser): Promise<string> => {
   }
 };
 
-export const getFriends = async (id: { id: number }): Promise<iResponseFriends[]> => {
+export const getFriends = async (id: { id: number }): Promise<iResponseFriends[] | string> => {
   try {
     const res = await fetch(API_FRIENDS_USER, {
       method: 'POST',
@@ -115,6 +115,27 @@ export const getFriends = async (id: { id: number }): Promise<iResponseFriends[]
       },
       body: JSON.stringify(id),
     });
+    if (!res.ok) {
+      throw new Error(`${res.status}`);
+    }
+    return await res.json();
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const deleteFriends = async (id: number, friendId: number): Promise<string> => {
+  try {
+    const res = await fetch(
+      `http://localhost:8080/api/friends_delete/friends=${friendId}&user=${id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Origin: 'http://localhost:8080/',
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+      },
+    );
     if (!res.ok) {
       throw new Error(`${res.status}`);
     }

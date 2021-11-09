@@ -14,7 +14,7 @@ import {
   AiOutlineUserAdd,
 } from 'react-icons/ai';
 import { Context } from '../../../Context/Context';
-import gnomeDef from '../../../assets/img/gnomeDef.png';
+import avatarDefualt from '../../../assets/img/gnomeDef.png';
 import ComplateProfile from '../../ComplateProfile/ComplateProfile';
 
 interface INavList {
@@ -24,7 +24,7 @@ interface INavList {
 export interface IUserLogo {
   logo?: string;
 }
-const AdminPanelNav: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
+const AdminPanelNav: React.FC<IUserLogo> = ({ logo = avatarDefualt }) => {
   const { userInfo, percentProfile } = React.useContext(Context);
   const [activeLink, setActiveLink] = React.useState<number>(0);
   const getActiveLinkIndex = (index: number): void => {
