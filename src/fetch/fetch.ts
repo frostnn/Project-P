@@ -3,6 +3,7 @@ import {
   API_AUTH_USER,
   API_UPDATE_USER,
   API_FRIENDS_USER,
+  API_ALL_USER,
 } from '../constants/constants';
 export interface iUser {
   name: string;
@@ -136,6 +137,24 @@ export const deleteFriends = async (id: number, friendId: number): Promise<strin
         },
       },
     );
+    if (!res.ok) {
+      throw new Error(`${res.status}`);
+    }
+    return await res.json();
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const getAllUser = async (): Promise<iAuthUser> => {
+  try {
+    const res = await fetch(API_ALL_USER, {
+      method: 'GET',
+      headers: {
+        Origin: 'http://localhost:8080/',
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    });
     if (!res.ok) {
       throw new Error(`${res.status}`);
     }

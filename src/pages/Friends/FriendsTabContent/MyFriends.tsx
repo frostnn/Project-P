@@ -13,6 +13,7 @@ interface iToggleView {
 interface iToggleSetting {
   activeFriendsSetting: number | null;
   i?: number;
+  toggleViewItems?: boolean;
 }
 const SortPanel = styled.div`
   display: flex;
@@ -60,11 +61,13 @@ const AvatarFriend = styled.img`
   margin-bottom: 10px;
 `;
 
-const FriendsList = styled.div`
+const FriendsList = styled.div<iToggleView>`
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: ${({ toggleViewItems }) => (!toggleViewItems ? 'row' : 'column')};
 `;
 
-const FriendsListItem = styled.div`
+const FriendsListItem = styled.div<iToggleView>`
   position: relative;
   margin: 10px;
   padding: 15px;
@@ -75,6 +78,7 @@ const FriendsListItem = styled.div`
   background: #333947;
   cursor: pointer;
   transition: 0.3s;
+  width: ${({ toggleViewItems }) => (!toggleViewItems ? '147px' : 'auto')};
   &:hover {
     box-shadow: 1px 1px #4bbf84, 2px 2px #4bbf84, 3px 3px #4bbf84, 4px 4px #4bbf84, 5px 5px #4bbf84,
       6px 6px #4bbf84, 7px 7px #4bbf84;
@@ -121,11 +125,11 @@ const FriendDotsSettingBtn = styled.button`
 `;
 const FriendsModalSetting = styled.div<iToggleSetting>`
   position: absolute;
-  inset: auto auto 123px 143px;
+  inset: ${({ toggleViewItems }) =>
+    !toggleViewItems ? 'auto auto 105px 143px' : 'auto auto 106px 870px'};
   margin: 0px;
   z-index: 999;
   background: #333947;
-
   border-radius: 4px;
   padding: 5px;
   visibility: ${({ activeFriendsSetting, i }) =>
@@ -145,7 +149,6 @@ const FriendsModalSettingList = styled.ul`
 
 const FriendsModalSettingListItem = styled.li`
   padding: 2px 0;
-
   :hover {
     color: #4bbf84;
   }
@@ -154,7 +157,7 @@ const MyFrinds = () => {
   const [userFriends, setUserFriends] = React.useState<iResponseFriends[] | string>([]);
   const [toggleViewItems, setToggleViewItems] = React.useState<boolean>(false);
   const [activeFriendsSetting, setActiveFriendsSetting] = React.useState<number | null>(null);
-  const [mess, setMess] = React.useState<string | null>(null);
+  const [messageDelete, setMessageDelete] = React.useState<string | null>(null);
   const { userInfo } = React.useContext(Context);
 
   const toggleViewFriends = (value: boolean) => setToggleViewItems(value);
@@ -163,7 +166,7 @@ const MyFrinds = () => {
 
   const deleteFriend = async (friendId: number) => {
     const data = await deleteFriends(userInfo.id, friendId);
-    setMess(data);
+    setMessageDelete(data);
   };
 
   const getAllFriends = async (id: { id: number }) => {
@@ -173,7 +176,13 @@ const MyFrinds = () => {
   console.log(userInfo.id);
   React.useEffect(() => {
     getAllFriends({ id: userInfo.id });
-  }, [userInfo.id]);
+  }, [userInfo.id, messageDelete]);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setMessageDelete(null);
+    }, 2000);
+  }, [messageDelete]);
   return (
     <React.Fragment>
       <div>
@@ -187,10 +196,10 @@ const MyFrinds = () => {
             toggleViewItems={toggleViewItems}
           />
         </SortPanel>
-        <FriendsList>
+        <FriendsList toggleViewItems={toggleViewItems}>
           {Array.isArray(userFriends) ? (
-            userFriends.map(({ name, last_name, avatar, id_user, id_friend }, i) => (
-              <FriendsListItem>
+            userFriends.map(({ name, last_name, avatar, id_friend }, i) => (
+              <FriendsListItem toggleViewItems={toggleViewItems}>
                 <FriendDotsSettingBtn
                   onClick={() =>
                     activeFriendsSetting === i
@@ -199,7 +208,10 @@ const MyFrinds = () => {
                   }>
                   <FriendDotsSettingIcon i={i} activeFriendsSetting={activeFriendsSetting} />
                 </FriendDotsSettingBtn>
-                <FriendsModalSetting i={i} activeFriendsSetting={activeFriendsSetting}>
+                <FriendsModalSetting
+                  toggleViewItems={toggleViewItems}
+                  i={i}
+                  activeFriendsSetting={activeFriendsSetting}>
                   <FriendsModalSettingList>
                     <FriendsModalSettingListItem>ID: {id_friend}</FriendsModalSettingListItem>
                     <FriendsModalSettingListItem onClick={() => deleteFriend(id_friend)}>
@@ -228,7 +240,7 @@ const MyFrinds = () => {
           )}
         </FriendsList>
       </div>
-      {mess && <Response status={'noerror'} message={mess} />}
+      {messageDelete && <Response status={'noerror'} message={messageDelete} />}
     </React.Fragment>
   );
 };
