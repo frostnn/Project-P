@@ -3,6 +3,7 @@ import Gallery from '../pages/Gallery/Gallery';
 import Home from '../pages/Home/Home';
 import Profile from '../pages/Profile/Profile';
 import Friends from '../pages/Friends/Friends';
+import User from '../components/User/User';
 
 const routesConfig = [
   {
@@ -29,6 +30,11 @@ const routesConfig = [
     path: '/login/Friends',
     exact: true,
     component: Friends,
+  },
+  {
+    path: '/login/User/:id',
+    exact: true,
+    component: User,
   },
 ];
 

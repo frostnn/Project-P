@@ -8,6 +8,7 @@ interface IState {
   setUserInfo: (c: any) => void;
   percentProfile: Number;
   setPercentProfile: (c: any) => void;
+  countPercent: () => void;
 }
 export const Context = React.createContext<IState>({
   logged: false,
@@ -33,4 +34,5 @@ export const Context = React.createContext<IState>({
   setLogged: () => {},
   setUserInfo: () => {},
   setPercentProfile: () => {},
+  countPercent: () => {},
 });

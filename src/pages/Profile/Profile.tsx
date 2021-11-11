@@ -29,7 +29,7 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
   const inputFile = React.useRef<HTMLInputElement>(null);
   const [toggleEdit, setToggleEdit] = React.useState<boolean>(false);
   const [toggleSocial, setToggleSocial] = React.useState<boolean>(false);
-  const { userInfo, setUserInfo, setPercentProfile } = React.useContext(Context);
+  const { userInfo, setUserInfo, setPercentProfile, countPercent } = React.useContext(Context);
   const [responseUpdate, setResponseUpdate] = React.useState<string>('');
   const [disabledBtnSave, setDisabledBtnSave] = React.useState<boolean>(false);
   const [visibilityBtnSaveAvatar, setVisibilityBtnSaveAvatar] = React.useState<boolean>(false);
@@ -75,18 +75,6 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
       selected: userInfo.snapchat ? true : false,
     },
   ]);
-  const countPercent = () => {
-    let n = 0;
-    for (const key in userInfo) {
-      if (key !== 'id' && key !== 'avatar' && key !== 'confirmed') {
-        if (userInfo[key]) {
-          n++;
-        }
-      }
-    }
-    const x = (n * 100) / 13;
-    setPercentProfile(x);
-  };
 
   const clickInputFile = () => {
     if (inputFile.current) {
@@ -150,9 +138,6 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
     }, 4000);
   }, [responseUpdate]);
 
-  React.useEffect(() => {
-    countPercent();
-  }, [userInfo]);
   return (
     <div className={style.profile_block}>
       <h1>Profile</h1>

@@ -28,9 +28,32 @@ const Main = () => {
     snapchat: '',
   });
 
+  const countPercent = () => {
+    let n = 0;
+    for (const key in userInfo) {
+      if (key !== 'id' && key !== 'avatar' && key !== 'confirmed') {
+        if (userInfo[key]) {
+          n++;
+        }
+      }
+    }
+    const x = (n * 100) / 13;
+    setPercentProfile(x);
+  };
+  React.useEffect(() => {
+    countPercent();
+  }, [userInfo]);
   return (
     <Context.Provider
-      value={{ logged, setLogged, userInfo, setUserInfo, percentProfile, setPercentProfile }}>
+      value={{
+        logged,
+        setLogged,
+        userInfo,
+        setUserInfo,
+        percentProfile,
+        setPercentProfile,
+        countPercent,
+      }}>
       <div className={style.main_block}>
         {logged ? <Redirect to={'/login/Home'} /> : <Redirect to={'/'} />}
         <Switch>

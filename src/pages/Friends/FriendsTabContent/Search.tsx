@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getAllUser, iAuthUser } from '../../../fetch/fetch';
-import { Context } from '../../../Context/Context';
-import { getFriends, iResponseFriends, deleteFriends } from '../../../fetch/fetch';
 import { IoListOutline, IoGridOutline, IoMail } from 'react-icons/io5';
 import { FaTelegramPlane, FaPhone } from 'react-icons/fa';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
@@ -221,7 +219,7 @@ const Search = () => {
     const data = await getAllUser();
     setAllUser(data);
   };
-
+  console.log(allUser);
   React.useEffect(() => {
     getUsers();
   }, []);
@@ -261,7 +259,7 @@ const Search = () => {
                   name.toLowerCase().includes(search.toLowerCase()) ||
                   last_name.toLowerCase().includes(search.toLowerCase()),
               )
-              .map(({ name, last_name, avatar, id_friend }, i) => (
+              .map(({ name, last_name, avatar, id }, i) => (
                 <UsersListItem toggleViewItems={toggleViewItems}>
                   <FriendDotsSettingBtn
                     onClick={() =>
@@ -276,7 +274,7 @@ const Search = () => {
                     i={i}
                     activeUsersSetting={activeUsersSetting}>
                     <UsersModalSettingList>
-                      <UsersModalSettingListItem>ID: {id_friend}</UsersModalSettingListItem>
+                      <UsersModalSettingListItem>ID: {id}</UsersModalSettingListItem>
                       <UsersModalSettingListItem>Add friend</UsersModalSettingListItem>
                       <UsersModalSettingListItem>Block user</UsersModalSettingListItem>
                       <UsersModalSettingListItem>Send a message</UsersModalSettingListItem>

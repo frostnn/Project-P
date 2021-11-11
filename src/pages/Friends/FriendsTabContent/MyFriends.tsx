@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Context } from '../../../Context/Context';
 import { getFriends, iResponseFriends, deleteFriends } from '../../../fetch/fetch';
@@ -65,6 +66,12 @@ const FriendsList = styled.div<iToggleView>`
   display: flex;
   flex-wrap: wrap;
   flex-direction: ${({ toggleViewItems }) => (!toggleViewItems ? 'row' : 'column')};
+  a {
+    text-decoration: none;
+  }
+  svg {
+    color: #fff;
+  }
 `;
 
 const FriendsListItem = styled.div<iToggleView>`
@@ -199,41 +206,43 @@ const MyFrinds = () => {
         <FriendsList toggleViewItems={toggleViewItems}>
           {Array.isArray(userFriends) ? (
             userFriends.map(({ name, last_name, avatar, id_friend }, i) => (
-              <FriendsListItem toggleViewItems={toggleViewItems}>
-                <FriendDotsSettingBtn
-                  onClick={() =>
-                    activeFriendsSetting === i
-                      ? toggleModalFriendsSetting(null)
-                      : toggleModalFriendsSetting(i)
-                  }>
-                  <FriendDotsSettingIcon i={i} activeFriendsSetting={activeFriendsSetting} />
-                </FriendDotsSettingBtn>
-                <FriendsModalSetting
-                  toggleViewItems={toggleViewItems}
-                  i={i}
-                  activeFriendsSetting={activeFriendsSetting}>
-                  <FriendsModalSettingList>
-                    <FriendsModalSettingListItem>ID: {id_friend}</FriendsModalSettingListItem>
-                    <FriendsModalSettingListItem onClick={() => deleteFriend(id_friend)}>
-                      Remove friend
-                    </FriendsModalSettingListItem>
-                    <FriendsModalSettingListItem>Block friend</FriendsModalSettingListItem>
-                    <FriendsModalSettingListItem>Send a message</FriendsModalSettingListItem>
-                  </FriendsModalSettingList>
-                </FriendsModalSetting>
-                <div>
-                  <AvatarFriend src={avatar ? (avatar as string) : avatarDefualt} />
-                </div>
-                <div>
-                  <FriendsName>{name}</FriendsName>
-                  <FriendsName>{last_name}</FriendsName>
-                </div>
-                <IconWrapper>
-                  <FaPhone />
-                  <IoMail />
-                  <FaTelegramPlane />
-                </IconWrapper>
-              </FriendsListItem>
+              <Link to={`/login/User/${id_friend}`} key={id_friend}>
+                <FriendsListItem toggleViewItems={toggleViewItems}>
+                  <FriendDotsSettingBtn
+                    onClick={() =>
+                      activeFriendsSetting === i
+                        ? toggleModalFriendsSetting(null)
+                        : toggleModalFriendsSetting(i)
+                    }>
+                    <FriendDotsSettingIcon i={i} activeFriendsSetting={activeFriendsSetting} />
+                  </FriendDotsSettingBtn>
+                  <FriendsModalSetting
+                    toggleViewItems={toggleViewItems}
+                    i={i}
+                    activeFriendsSetting={activeFriendsSetting}>
+                    <FriendsModalSettingList>
+                      <FriendsModalSettingListItem>ID: {id_friend}</FriendsModalSettingListItem>
+                      <FriendsModalSettingListItem onClick={() => deleteFriend(id_friend)}>
+                        Remove friend
+                      </FriendsModalSettingListItem>
+                      <FriendsModalSettingListItem>Block friend</FriendsModalSettingListItem>
+                      <FriendsModalSettingListItem>Send a message</FriendsModalSettingListItem>
+                    </FriendsModalSettingList>
+                  </FriendsModalSetting>
+                  <div>
+                    <AvatarFriend src={avatar ? (avatar as string) : avatarDefualt} />
+                  </div>
+                  <div>
+                    <FriendsName>{name}</FriendsName>
+                    <FriendsName>{last_name}</FriendsName>
+                  </div>
+                  <IconWrapper>
+                    <FaPhone />
+                    <IoMail />
+                    <FaTelegramPlane />
+                  </IconWrapper>
+                </FriendsListItem>
+              </Link>
             ))
           ) : (
             <h3>{userFriends}</h3>

@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router';
 import routesConfig from '../../Routers/routersConfig';
 import AdminPanelHeader from './AdminPanelHeader/AdminPanelHeader';
 import AdminPanelNav from './AdminPanelNav/AdminPanelNav';
-
+console.log(routesConfig);
 const AdminPanel: React.FC = () => {
   const [toggleMenu, setToggleMenu] = React.useState<boolean>(false);
   return (
