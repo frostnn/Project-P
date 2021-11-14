@@ -163,3 +163,24 @@ export const getAllUser = async (): Promise<iAuthUser> => {
     throw new Error(error);
   }
 };
+
+export const addFriend = async (id: number, friendId: number): Promise<string> => {
+  try {
+    const res = await fetch(
+      `http://localhost:8080/api/friends_add/friends=${friendId}&user=${id}`,
+      {
+        method: 'POST',
+        headers: {
+          Origin: 'http://localhost:8080/',
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+      },
+    );
+    if (!res.ok) {
+      throw new Error(`${res.status}`);
+    }
+    return await res.json();
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};

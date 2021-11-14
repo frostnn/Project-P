@@ -57,8 +57,8 @@ const Friends: React.FC = () => {
   const toggleTabs = (index: number) => setActive(index);
   const tabsTitle: iTabs[] = [
     { title: 'Friends', component: <MyFrinds />, icon: <FaUserFriends /> },
-    { title: 'Recommend', component: <Recommend />, icon: <MdRecommend /> },
     { title: 'Search', component: <Search />, icon: <MdPersonSearch /> },
+    { title: 'Recommend', component: <Recommend />, icon: <MdRecommend /> },
   ];
   return (
     <React.Fragment>

@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { getAllUser, iAuthUser } from '../../../fetch/fetch';
+import { addFriend, getAllUser, iAuthUser } from '../../../fetch/fetch';
 import { IoListOutline, IoGridOutline, IoMail } from 'react-icons/io5';
 import { FaTelegramPlane, FaPhone } from 'react-icons/fa';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
@@ -8,6 +9,7 @@ import avatarDefualt from '../../../assets/img/gnomeDef.png';
 import Response from '../../../components/Response/Response';
 import { GoSearch } from 'react-icons/go';
 import { CgClose } from 'react-icons/cg';
+import { Context } from '../../../Context/Context';
 interface iToggleView {
   toggleViewItems: boolean;
 }
@@ -66,6 +68,12 @@ const UsersList = styled.div<iToggleView>`
   display: flex;
   flex-wrap: wrap;
   flex-direction: ${({ toggleViewItems }) => (!toggleViewItems ? 'row' : 'column')};
+  a {
+    text-decoration: none;
+  }
+  svg {
+    color: #fff;
+  }
 `;
 
 const UsersListItem = styled.div<iToggleView>`
@@ -87,6 +95,10 @@ const UsersListItem = styled.div<iToggleView>`
     transform: translateX(-7px);
     z-index: 9;
   }
+`;
+
+const UsersNameWrapper = styled.div`
+  text-align: center;
 `;
 const UsersName = styled.span`
   padding: 0px 3px;
@@ -200,13 +212,15 @@ const PanelSearchInput = styled.input`
     visibility: visible;
   }
 `;
+
 const Search = () => {
   const [allUser, setAllUser] = React.useState<iAuthUser | []>([]);
   const [toggleViewItems, setToggleViewItems] = React.useState<boolean>(false);
   const [activeUsersSetting, setActiveUsersSetting] = React.useState<number | null>(null);
   const [search, setSearch] = React.useState<string>('');
-  const [messageDelete, setMessageDelete] = React.useState<string | null>(null);
+  const [messageAdd, setMessageAdd] = React.useState<string | null>(null);
   const inputSearch = React.useRef<HTMLInputElement | null>(null);
+  const { userInfo } = React.useContext(Context);
   const toggleViewUsers = (value: boolean) => setToggleViewItems(value);
   const cleanSearchInput = () => {
     if (inputSearch.current) {
@@ -219,10 +233,20 @@ const Search = () => {
     const data = await getAllUser();
     setAllUser(data);
   };
-  console.log(allUser);
+
+  const addUserFriends = async (idFriends: number) => {
+    const data = await addFriend(userInfo.id, idFriends);
+    setMessageAdd(data);
+  };
+
   React.useEffect(() => {
     getUsers();
   }, []);
+  React.useEffect(() => {
+    setTimeout(() => {
+      setMessageAdd(null);
+    }, 2000);
+  }, [messageAdd]);
   return (
     <React.Fragment>
       <div>
@@ -275,18 +299,22 @@ const Search = () => {
                     activeUsersSetting={activeUsersSetting}>
                     <UsersModalSettingList>
                       <UsersModalSettingListItem>ID: {id}</UsersModalSettingListItem>
-                      <UsersModalSettingListItem>Add friend</UsersModalSettingListItem>
+                      <UsersModalSettingListItem onClick={() => addUserFriends(id)}>
+                        Add friend
+                      </UsersModalSettingListItem>
                       <UsersModalSettingListItem>Block user</UsersModalSettingListItem>
                       <UsersModalSettingListItem>Send a message</UsersModalSettingListItem>
                     </UsersModalSettingList>
                   </UsersModalSetting>
-                  <div>
-                    <AvatarFriend src={avatar ? (avatar as string) : avatarDefualt} />
-                  </div>
-                  <div>
-                    <UsersName>{name}</UsersName>
-                    <UsersName>{last_name}</UsersName>
-                  </div>
+                  <Link to={`/login/User/${id}`} key={id}>
+                    <div>
+                      <AvatarFriend src={avatar ? (avatar as string) : avatarDefualt} />
+                    </div>
+                    <UsersNameWrapper>
+                      <UsersName>{name}</UsersName>
+                      <UsersName>{last_name}</UsersName>
+                    </UsersNameWrapper>
+                  </Link>
                   <IconWrapper>
                     <FaPhone />
                     <IoMail />
@@ -296,7 +324,7 @@ const Search = () => {
               ))}
         </UsersList>
       </div>
-      {messageDelete && <Response status={'noerror'} message={messageDelete} />}
+      {messageAdd && <Response status={'noerror'} message={messageAdd} />}
     </React.Fragment>
   );
 };
