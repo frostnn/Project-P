@@ -1,5 +1,5 @@
 import React from 'react';
-import { iAuthUser } from '../fetch/fetch';
+import { iAuthUser, iResponseFriends } from '../fetch/fetch';
 
 interface IState {
   logged: Boolean;
@@ -9,6 +9,8 @@ interface IState {
   percentProfile: Number;
   setPercentProfile: (c: any) => void;
   countPercent: () => void;
+  setUserFriends: (c: any) => void;
+  userFriends: iResponseFriends[] | string;
 }
 export const Context = React.createContext<IState>({
   logged: false,
@@ -31,8 +33,10 @@ export const Context = React.createContext<IState>({
     gitlab: '',
     snapchat: '',
   },
+  userFriends: [],
   setLogged: () => {},
   setUserInfo: () => {},
   setPercentProfile: () => {},
   countPercent: () => {},
+  setUserFriends: () => {},
 });

@@ -4,6 +4,7 @@ import Home from '../pages/Home/Home';
 import Profile from '../pages/Profile/Profile';
 import Friends from '../pages/Friends/Friends';
 import User from '../components/User/User';
+import Message from '../pages/Message/Message';
 
 const routesConfig = [
   {
@@ -30,6 +31,11 @@ const routesConfig = [
     path: '/login/Friends',
     exact: true,
     component: Friends,
+  },
+  {
+    path: '/login/Message',
+    exact: false,
+    component: Message,
   },
   {
     path: '/login/User/:id',

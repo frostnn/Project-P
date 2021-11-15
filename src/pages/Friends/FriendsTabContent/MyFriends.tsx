@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Context } from '../../../Context/Context';
-import { getFriends, iResponseFriends, deleteFriends } from '../../../fetch/fetch';
+import { deleteFriends } from '../../../fetch/fetch';
 import { IoListOutline, IoGridOutline, IoMail } from 'react-icons/io5';
 import { FaTelegramPlane, FaPhone } from 'react-icons/fa';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
@@ -164,11 +164,10 @@ const FriendsModalSettingListItem = styled.li`
   }
 `;
 const MyFrinds = () => {
-  const [userFriends, setUserFriends] = React.useState<iResponseFriends[] | string>([]);
   const [toggleViewItems, setToggleViewItems] = React.useState<boolean>(false);
   const [activeFriendsSetting, setActiveFriendsSetting] = React.useState<number | null>(null);
   const [messageDelete, setMessageDelete] = React.useState<string | null>(null);
-  const { userInfo } = React.useContext(Context);
+  const { userInfo, userFriends, setUserFriends } = React.useContext(Context);
 
   const toggleViewFriends = (value: boolean) => setToggleViewItems(value);
 
@@ -176,17 +175,10 @@ const MyFrinds = () => {
 
   const deleteFriend = async (friendId: number) => {
     const data = await deleteFriends(userInfo.id, friendId);
+    Array.isArray(userFriends) &&
+      setUserFriends(userFriends.filter((item) => item.id_friend !== friendId));
     setMessageDelete(data);
   };
-
-  const getAllFriends = async (id: { id: number }) => {
-    const data = await getFriends(id);
-    setUserFriends(data);
-  };
-
-  React.useEffect(() => {
-    getAllFriends({ id: userInfo.id });
-  }, [userInfo.id, messageDelete]);
 
   React.useEffect(() => {
     setTimeout(() => {

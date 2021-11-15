@@ -4,11 +4,12 @@ import { Route, Switch, Redirect } from 'react-router';
 import React from 'react';
 import AdminPanel from '../components/AdminPanel/AdminPanel';
 import { Context } from '../Context/Context';
-import { iAuthUser } from '../fetch/fetch';
+import { iAuthUser, iResponseFriends, getFriends } from '../fetch/fetch';
 
 const Main = () => {
   const [logged, setLogged] = React.useState<Boolean>(false);
   const [percentProfile, setPercentProfile] = React.useState<Number>(0);
+  const [userFriends, setUserFriends] = React.useState<iResponseFriends[] | string>([]);
   const [userInfo, setUserInfo] = React.useState<iAuthUser>({
     id: 0,
     name: '',
@@ -40,9 +41,20 @@ const Main = () => {
     const x = (n * 100) / 13;
     setPercentProfile(x);
   };
+
+  const getAllFriends = async (id: { id: number }) => {
+    const data = await getFriends(id);
+    setUserFriends(data);
+  };
+
   React.useEffect(() => {
     countPercent();
   }, [userInfo]);
+  React.useEffect(() => {
+    getAllFriends({ id: userInfo.id });
+  }, [userInfo.id]);
+
+  console.log(userFriends);
   return (
     <Context.Provider
       value={{
@@ -53,6 +65,8 @@ const Main = () => {
         percentProfile,
         setPercentProfile,
         countPercent,
+        userFriends,
+        setUserFriends,
       }}>
       <div className={style.main_block}>
         {logged ? <Redirect to={'/login/Home'} /> : <Redirect to={'/'} />}

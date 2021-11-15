@@ -9,6 +9,8 @@ import Loading from '../../assets/img/loading.svg';
 import { authUser, iAuthUserData } from '../../fetch/fetch';
 import { Context } from '../../Context/Context';
 import AlertPassword from '../AlertPassword/AlertPassword';
+import socket from '../../socket/socket';
+
 interface iInput {
   type: string;
   placeholder: string;
@@ -82,10 +84,10 @@ const SingIn: React.FC<iSingIn> = ({ toggleAuth }) => {
       if (typeof user !== 'string' && Object.keys(user).length) {
         setLogged(true);
         setUserInfo(user);
+        socket.emit('ROOM:JOIN', user.id);
       } else if (typeof user === 'string') {
         setError(user);
       }
-      console.log(user);
     } catch (error: any) {
       console.log(`Could not fetch - ${error}`);
     }

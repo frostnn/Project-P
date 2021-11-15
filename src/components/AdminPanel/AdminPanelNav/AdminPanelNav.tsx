@@ -41,7 +41,7 @@ const AdminPanelNav: React.FC<IUserLogo> = ({ logo = avatarDefualt }) => {
     },
 
     {
-      title: 'Email',
+      title: 'Message',
       icon: <AiOutlineMail />,
     },
     {

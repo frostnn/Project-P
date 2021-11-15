@@ -49,6 +49,23 @@ export interface iResponseFriends {
   avatar: string | null;
 }
 
+export interface iListDialog {
+  id: number;
+  c_id: number;
+  name: string | null;
+  last_name: string | null;
+  avatar: string | null;
+}
+
+export interface iListMessage {
+  id: number;
+  cr_id: number;
+  name: string | null;
+  last_name: string | null;
+  reply: string;
+  time: string | null;
+}
+
 export const createUser = async (data: iUser): Promise<iResponse> => {
   try {
     const res = await fetch(API_CREATE_USER, {
@@ -176,6 +193,42 @@ export const addFriend = async (id: number, friendId: number): Promise<string> =
         },
       },
     );
+    if (!res.ok) {
+      throw new Error(`${res.status}`);
+    }
+    return await res.json();
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const getListDialog = async (id: number): Promise<iListDialog[] | []> => {
+  try {
+    const res = await fetch(`http://localhost:8080/api/dialog_list/user=${id}`, {
+      method: 'GET',
+      headers: {
+        Origin: 'http://localhost:8080/',
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}`);
+    }
+    return await res.json();
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const getListMessage = async (id: number): Promise<iListMessage[]> => {
+  try {
+    const res = await fetch(`http://localhost:8080/api/message_list/list=${id}`, {
+      method: 'GET',
+      headers: {
+        Origin: 'http://localhost:8080/',
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    });
     if (!res.ok) {
       throw new Error(`${res.status}`);
     }
