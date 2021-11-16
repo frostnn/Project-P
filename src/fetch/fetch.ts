@@ -63,6 +63,7 @@ export interface iListMessage {
   name: string | null;
   last_name: string | null;
   reply: string;
+  avatar: string | null;
   time: string | null;
 }
 
