@@ -26,10 +26,10 @@ export interface iSocial {
 }
 
 const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
-  const inputFile = React.useRef<HTMLInputElement>(null);
+  const inputFile = React.useRef<HTMLInputElement | null>(null);
   const [toggleEdit, setToggleEdit] = React.useState<boolean>(false);
   const [toggleSocial, setToggleSocial] = React.useState<boolean>(false);
-  const { userInfo, setUserInfo, setPercentProfile, countPercent } = React.useContext(Context);
+  const { userInfo, setUserInfo } = React.useContext(Context);
   const [responseUpdate, setResponseUpdate] = React.useState<string>('');
   const [disabledBtnSave, setDisabledBtnSave] = React.useState<boolean>(false);
   const [visibilityBtnSaveAvatar, setVisibilityBtnSaveAvatar] = React.useState<boolean>(false);
@@ -109,7 +109,12 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
   const getUrlImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const files = e.target.files[0];
-      const reader = new FileReader();
+      const imgUrl = window.URL.createObjectURL(files);
+      setUserInfo({
+        ...userInfo,
+        avatar: imgUrl,
+      });
+      /*   const reader = new FileReader();
       reader.onload = (e) => {
         if (e.target) {
           setUserInfo({
@@ -118,7 +123,7 @@ const Profile: React.FC<IUserLogo> = ({ logo = gnomeDef }) => {
           });
         }
       };
-      reader.readAsDataURL(files);
+      reader.readAsDataURL(files); */
     }
     setVisibilityBtnSaveAvatar(true);
   };

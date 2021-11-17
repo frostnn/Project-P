@@ -7,6 +7,7 @@ import { Context } from '../../Context/Context';
 import { MdOutlineInsertEmoticon } from 'react-icons/md';
 import { AiOutlinePaperClip } from 'react-icons/ai';
 import { RiSendPlane2Fill } from 'react-icons/ri';
+import { FiChevronDown } from 'react-icons/fi';
 
 interface iID {
   myId: number;
@@ -65,6 +66,9 @@ const DialogItemMessage = styled.div<iID>`
     border-right: 12px solid transparent;
     border-top: 13px solid ${({ myId, userId }) => (myId !== userId ? '#4bbf84' : '#f7f7f7')};
   }
+  & svg {
+    color: ${({ myId, userId }) => (myId !== userId ? '#fff' : '#303')};
+  }
 `;
 const DialogItemTime = styled.span`
   position: absolute;
@@ -89,6 +93,7 @@ const DialogSendPanelInput = styled.input`
   border-radius: 21px;
   outline: none;
   width: 520px;
+  font-size: 16px;
 `;
 const DialogSendPanelBtn = styled.button`
   display: flex;
@@ -96,6 +101,9 @@ const DialogSendPanelBtn = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 const DialogSendPanelWrapper = styled.div`
   display: flex;
@@ -111,19 +119,96 @@ const Emoticon = styled(MdOutlineInsertEmoticon)`
 
 const PaperClip = styled(AiOutlinePaperClip)`
   padding: 5px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+const MessageSettingWrapper = styled.button`
+  position: absolute;
+  right: 2px;
+  top: 1px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+const Fileinput = styled.input`
+  display: none;
+`;
+const MessageImg = styled.img`
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 8px;
 `;
 const Dialogs: React.FC = () => {
-  const [dialogList, setDialogList] = React.useState<iListMessage[] | []>([]);
+  const [dialogList, setDialogList] = React.useState<iListMessage[]>([]);
+  const [reply, setReply] = React.useState<string>('');
   const { id } = useParams<{ id: string }>();
   const { userInfo } = React.useContext(Context);
+  const messagesEndRef = React.useRef<HTMLDivElement | null>(null);
+  const messageInput = React.useRef<HTMLInputElement | null>(null);
+  const inputFile = React.useRef<HTMLInputElement | null>(null);
 
   const getListDialogs = async (id: number) => {
     const data = await getListMessage(id);
     setDialogList(data);
   };
+
+  const getMessage = (e: React.ChangeEvent<HTMLInputElement>) => setReply(e.target.value);
+  const preventDefaultBtn = (e: React.MouseEvent<HTMLButtonElement>) => e.preventDefault();
+
+  const getAttachMessage = (e: React.MouseEvent<any>) => {
+    if (inputFile.current) {
+      inputFile.current.click();
+    }
+  };
+  const getUrlImgMessage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = e.target.files[0];
+      const imgUrl = window.URL.createObjectURL(files);
+      const time = new Date();
+      const message = {
+        avatar: userInfo.avatar,
+        cr_id: Math.max(...dialogList.map((item) => item.cr_id)) + 1,
+        id: userInfo.id,
+        last_name: userInfo.last_name,
+        name: userInfo.name,
+        reply: imgUrl,
+        time: time.toString(),
+      };
+      setDialogList([...dialogList, message]);
+    }
+  };
+  const sendMassege = (e: React.FormEvent<EventTarget>) => {
+    e.preventDefault();
+    const time = new Date();
+    const message = {
+      avatar: userInfo.avatar,
+      cr_id: Math.max(...dialogList.map((item) => item.cr_id)) + 1,
+      id: userInfo.id,
+      last_name: userInfo.last_name,
+      name: userInfo.name,
+      reply: reply,
+      time: time.toString(),
+    };
+    setDialogList([...dialogList, message]);
+    if (messageInput.current) {
+      messageInput.current.value = '';
+    }
+  };
+
   React.useEffect(() => {
     getListDialogs(+id);
   }, [id]);
+  React.useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    }
+  }, [dialogList]);
 
   return (
     <DialogWindow>
@@ -136,33 +221,48 @@ const Dialogs: React.FC = () => {
               </DialogItemAvatar>
             )}
             <DialogItemMessage myId={userInfo.id} userId={id}>
-              {reply}
+              {reply.match('blob:http://') && reply.length === 63 ? (
+                <MessageImg src={reply} />
+              ) : (
+                reply
+              )}
               {time && (
                 <DialogItemTime>
                   {new Date(time).toLocaleTimeString().slice(0, -3)}
                   {/* {new Date(time).toLocaleTimeString()} */}
                 </DialogItemTime>
               )}
+              <MessageSettingWrapper>
+                <FiChevronDown />
+              </MessageSettingWrapper>
             </DialogItemMessage>
           </DialogItem>
         ))}
+        <div ref={messagesEndRef} />
       </DialogItemWrapper>
-      <DialogSendPanel>
-        <DialogSendPanelWrapper>
-          <DialogSendPanelBtn>
-            <Emoticon />
-          </DialogSendPanelBtn>
-          <DialogSendPanelBtn>
-            <PaperClip />
-          </DialogSendPanelBtn>
-        </DialogSendPanelWrapper>
-        <DialogSendPanelWrapper>
-          <DialogSendPanelInput type="text" placeholder="Enter a message" />
-          <DialogSendPanelBtn>
-            <RiSendPlane2Fill />
-          </DialogSendPanelBtn>
-        </DialogSendPanelWrapper>
-      </DialogSendPanel>
+      <form onSubmit={(e) => sendMassege(e)}>
+        <DialogSendPanel>
+          <DialogSendPanelWrapper>
+            <DialogSendPanelBtn>
+              <Emoticon />
+            </DialogSendPanelBtn>
+
+            <PaperClip onClick={(e) => getAttachMessage(e)} />
+            <Fileinput type="file" ref={inputFile} onChange={(e) => getUrlImgMessage(e)} />
+          </DialogSendPanelWrapper>
+          <DialogSendPanelWrapper>
+            <DialogSendPanelInput
+              type="text"
+              placeholder="Enter a message"
+              onChange={(e) => getMessage(e)}
+              ref={messageInput}
+            />
+            <DialogSendPanelBtn type="submit">
+              <RiSendPlane2Fill />
+            </DialogSendPanelBtn>
+          </DialogSendPanelWrapper>
+        </DialogSendPanel>
+      </form>
     </DialogWindow>
   );
 };

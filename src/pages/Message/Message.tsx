@@ -6,6 +6,12 @@ import avatarDefualt from '../../assets/img/gnomeDef.png';
 import { Route, Switch } from 'react-router';
 import Dialogs from './Dialogs';
 import { Link } from 'react-router-dom';
+
+interface iActiveMessageList {
+  activeMessageList: number;
+  c_id: number;
+}
+
 const MessageBlock = styled.div`
   display: flex;
   justify-content: space-between;
@@ -23,14 +29,19 @@ const MessageBlockMessages = styled.div`
   margin: 5px;
   border-radius: 4px;
 `;
-const User = styled.div`
+const User = styled.div<iActiveMessageList>`
   display: flex;
   align-items: center;
-  background: #333947;
+  background: ${({ activeMessageList, c_id }) =>
+    activeMessageList === c_id ? '#4bbf84' : '#333947'};
   border-radius: 4px;
   margin: 4px;
   padding: 5px;
   color: #fff;
+  transition: 0.3s;
+  &:hover {
+    background: #4bbf84;
+  }
 `;
 const UserAvatarWrapper = styled.div`
   img {
@@ -43,26 +54,36 @@ const UserName = styled.div`
   margin-left: 5px;
 `;
 const Message: React.FC = () => {
-  const [messageList, setMessageList] = React.useState<iListDialog[] | []>([]);
+  const [messageList, setMessageList] = React.useState<iListDialog[]>([]);
+  const [activeMessageList, setActiveMessageList] = React.useState<number>(0);
+  const { userInfo } = React.useContext(Context);
+
+  const toggleActiveMessageList = (value: number) => setActiveMessageList(value);
   const getListMessages = async (id: number) => {
     const data = await getListDialog(id);
     setMessageList(data);
   };
 
-  const { userInfo } = React.useContext(Context);
+  const ar = ['\u{1F602}', '\u{1F601}', '\u{1F603}', '\u{1F604}'];
+
   React.useEffect(() => {
     getListMessages(userInfo.id);
   }, []);
 
   return (
     <div>
-      <h1>Message</h1>
+      {/*       {ar.map((emodji) => (
+        <h4>{emodji}</h4>
+      ))} */}
+      <h1>Message &#128516;</h1>
       <MessageBlock>
         <MessageBlockDialogs>
           {Array.isArray(messageList) ? (
             messageList.map(({ name, last_name, avatar, c_id }, i) => (
-              <Link to={`/login/Message/dialog/${c_id}`}>
-                <User>
+              <Link
+                to={`/login/Message/dialog/${c_id}`}
+                onClick={() => toggleActiveMessageList(c_id)}>
+                <User activeMessageList={activeMessageList} c_id={c_id}>
                   <UserAvatarWrapper>
                     <img src={avatar ? (avatar as string) : avatarDefualt} />
                   </UserAvatarWrapper>
@@ -77,6 +98,7 @@ const Message: React.FC = () => {
           )}
         </MessageBlockDialogs>
         <MessageBlockMessages>
+          {!activeMessageList && <h3>Select a dialog</h3>}
           <Switch>
             <Route path="/login/Message/dialog/:id" component={Dialogs} exact />
           </Switch>
