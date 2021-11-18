@@ -15,6 +15,7 @@ interface iActiveMessageList {
 const MessageBlock = styled.div`
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
 `;
 const MessageBlockDialogs = styled.div`
   width: 30%;
@@ -64,17 +65,12 @@ const Message: React.FC = () => {
     setMessageList(data);
   };
 
-  const ar = ['\u{1F602}', '\u{1F601}', '\u{1F603}', '\u{1F604}'];
-
   React.useEffect(() => {
     getListMessages(userInfo.id);
   }, []);
 
   return (
-    <div>
-      {/*       {ar.map((emodji) => (
-        <h4>{emodji}</h4>
-      ))} */}
+    <React.Fragment>
       <h1>Message &#128516;</h1>
       <MessageBlock>
         <MessageBlockDialogs>
@@ -82,13 +78,14 @@ const Message: React.FC = () => {
             messageList.map(({ name, last_name, avatar, c_id }, i) => (
               <Link
                 to={`/login/Message/dialog/${c_id}`}
-                onClick={() => toggleActiveMessageList(c_id)}>
+                onClick={() => toggleActiveMessageList(c_id)}
+                key={c_id}>
                 <User activeMessageList={activeMessageList} c_id={c_id}>
                   <UserAvatarWrapper>
                     <img src={avatar ? (avatar as string) : avatarDefualt} />
                   </UserAvatarWrapper>
                   <UserName>
-                    <span>{name}</span> <span>{last_name}</span> <div>Dialog №{c_id}</div>
+                    <span>{name}</span> <span>{last_name}</span>
                   </UserName>
                 </User>
               </Link>
@@ -104,7 +101,7 @@ const Message: React.FC = () => {
           </Switch>
         </MessageBlockMessages>
       </MessageBlock>
-    </div>
+    </React.Fragment>
   );
 };
 

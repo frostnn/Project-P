@@ -44,6 +44,7 @@ const Main = () => {
 
   const getAllFriends = async (id: { id: number }) => {
     const data = await getFriends(id);
+    console.log(id);
     setUserFriends(data);
   };
 
@@ -52,7 +53,7 @@ const Main = () => {
   }, [userInfo]);
   React.useEffect(() => {
     getAllFriends({ id: userInfo.id });
-  }, [userInfo.id]);
+  }, []);
 
   console.log(userFriends);
   return (

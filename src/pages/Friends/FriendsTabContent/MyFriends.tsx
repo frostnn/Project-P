@@ -179,7 +179,7 @@ const MyFrinds = () => {
       setUserFriends(userFriends.filter((item) => item.id_friend !== friendId));
     setMessageDelete(data);
   };
-
+  console.log(userFriends);
   React.useEffect(() => {
     setTimeout(() => {
       setMessageDelete(null);
